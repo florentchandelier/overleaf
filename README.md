@@ -7,8 +7,6 @@
 
 <p align="center">
   <a href="https://github.com/overleaf/overleaf/wiki">Wiki</a> •
-  <a href="https://www.overleaf.com/for/enterprises">Server Pro</a> •
-  <a href="#contributing">Contributing</a> •
   <a href="https://mailchi.mp/overleaf.com/community-edition-and-server-pro">Mailing List</a> •
   <a href="#authors">Authors</a> •
   <a href="#license">License</a>
@@ -19,17 +17,15 @@
   Figure 1: A screenshot of a project being edited in Overleaf Community Edition.
 </p>
 
-## Community Edition
+## Community Edition - with community-enabled modules
 
-[Overleaf](https://www.overleaf.com) is an open-source online real-time collaborative LaTeX editor. We run a hosted version at [www.overleaf.com](https://www.overleaf.com), but you can also run your own local version, and contribute to the development of Overleaf.
+[Overleaf](https://www.overleaf.com) is an open-source online real-time collaborative LaTeX editor. This repo is meant for self-hosting overleaf (or a local version of it).
 
-## Enterprise
+A professional version, with free-tier, is available from the original developers at [www.overleaf.com](https://www.overleaf.com), and enterprise support is available at [Overleaf Server Pro](https://www.overleaf.com/for/enterprises).
 
-If you want help installing and maintaining Overleaf in your lab or workplace, we offer an officially supported version called [Overleaf Server Pro](https://www.overleaf.com/for/enterprises). It also includes more features for security (SSO with LDAP or SAML), administration and collaboration (e.g. tracked changes). [Find out more!](https://www.overleaf.com/for/enterprises)
-
-## Keeping up to date
-
-Sign up to the [mailing list](https://mailchi.mp/overleaf.com/community-edition-and-server-pro) to get updates on Overleaf releases and development.
+### Community-enabled Modules
+* comments: created by [yu-i-i/overleaf-cep](https://github.com/yu-i-i/overleaf-cep), tracked by community issue [1193](https://github.com/overleaf/overleaf/issues/1193)
+* track change: created by [yu-i-i/overleaf-cep](https://github.com/yu-i-i/overleaf-cep), tracked by community issue [1193](https://github.com/overleaf/overleaf/issues/1193)
 
 ## Installation
 
@@ -54,18 +50,7 @@ and services.
 
 Use `make build-base` and `make build-community` from `server-ce/` to build these images.
 
-We use the [Phusion base-image](https://github.com/phusion/baseimage-docker)
-(which is extended by our `base` image) to provide us with a VM-like container
-in which to run the Overleaf services. Baseimage uses the `runit` service
-manager to manage services, and we add our init-scripts from the `server-ce/runit`
-folder.
-
-
-## Contributing
-
-Please see the [CONTRIBUTING](CONTRIBUTING.md) file for information on contributing to the development of Overleaf.
-
-## Authors
+## Original Authors
 
 [The Overleaf Team](https://www.overleaf.com/about)
 
