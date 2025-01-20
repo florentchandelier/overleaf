@@ -49,7 +49,7 @@ build-base-fulltexlive:
 build-community:
 	cp .dockerignore $(MONOREPO_ROOT)
 	docker build \
-	  --build-arg "OVERLEAF_BASE_TAG=$(OVERLEAF_LATEST)"
+	  --build-arg "OVERLEAF_BASE_TAG=$(OVERLEAF_LATEST)" \
 	  --build-arg BUILDKIT_INLINE_CACHE=1 \
 	  --progress=plain \
 	  --build-arg OVERLEAF_BASE_TAG \
@@ -64,13 +64,10 @@ build-community:
 build-community-fulltexlive:
 	cp .dockerignore $(MONOREPO_ROOT)
 	docker build \
-	  --build-arg "OVERLEAF_BASE_TAG=$(OVERLEAF_FULL_LATEST)" \
+	  --build-arg "OVERLEAF_BASE_TAG=$(OVERLEAF_FULL_LATEST):overleaf-ce" \
 	  --build-arg BUILDKIT_INLINE_CACHE=1 \
 	  --progress=plain \
-	  --build-arg OVERLEAF_BASE_TAG \
 	  --build-arg MONOREPO_REVISION \
-	  --cache-from $(OVERLEAF_FULL_LATEST) \
-	  --cache-from $(OVERLEAF_FULL_BRANCH) \
 	  --file Dockerfile \
 	  --tag $(OVERLEAF_FULL_TAG) \
 	  --tag $(OVERLEAF_FULL_BRANCH) \
