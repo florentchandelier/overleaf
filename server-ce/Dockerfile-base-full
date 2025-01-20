@@ -1,0 +1,32 @@
+# -----------------------------------------------------
+# Overleaf Base Image (sharelatex/sharelatex-base-full)
+# -----------------------------------------------------
+
+ARG OVERLEAF_BASE_TAG=sharelatex/sharelatex-base:latest
+FROM $OVERLEAF_BASE_TAG
+
+WORKDIR /overleaf
+
+# necessary for things like bib2gls and glossaries-extra
+RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get upgrade -y && \
+    apt install default-jre -y && \
+    rm -rf /var/lib/apt/lists/*
+
+# suggested in https://github.com/overleaf/overleaf/issues/873    
+RUN curl -fsSL -O "https://mirror.ctan.org/systems/texlive/tlnet/update-tlmgr-latest.sh" && sh update-tlmgr-latest.sh -- --upgrade && rm -f update-tlmgr-latest.sh && \
+    export TEXLIVE_PATH=/usr/local/texlive && \
+    ls -la "${TEXLIVE_PATH}" && \
+    export TEXLIVE_VERSION="$(find "${TEXLIVE_PATH}" -type d -name "2*" -printf "%f\n" | tail -1)" && \
+    export PATH="${PATH}:${TEXLIVE_PATH}/${TEXLIVE_VERSION}/bin/x86_64-linux" && \
+    echo "${PATH}" && \
+    tlmgr path add && \
+    tlmgr update --self --all && \
+    luaotfload-tool -fu && \
+    tlmgr path add && \
+    tlmgr install scheme-full && \
+    luaotfload-tool -fu && \
+    tlmgr path add
+
+
+
+
