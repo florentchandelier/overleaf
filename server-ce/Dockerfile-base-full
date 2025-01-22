@@ -1,9 +1,12 @@
-# -----------------------------------------------------
-# Overleaf Base Image (sharelatex/sharelatex-base-full)
-# -----------------------------------------------------
+# ----------------------------------------------------------------------------------------
+# Overleaf Base Image Extended with full TexLive distro (sharelatex/sharelatex-base-full)
+# ----------------------------------------------------------------------------------------
 
-ARG OVERLEAF_BASE_TAG=sharelatex/sharelatex-base:latest
+ARG OVERLEAF_BASE_TAG=sharelatex/sharelatex-ce-base:latest
 FROM $OVERLEAF_BASE_TAG
+
+# Default value for TLMGR_UPGRADE_MODE
+ARG TLMGR_UPGRADE_MODE="no-upgrade"  # Set to "no-upgrade" to skip the upgrade
 
 WORKDIR /overleaf
 
@@ -13,13 +16,23 @@ RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get upgrade -y && \
     rm -rf /var/lib/apt/lists/*
 
 # suggested in https://github.com/overleaf/overleaf/issues/873    
-RUN curl -fsSL -O "https://mirror.ctan.org/systems/texlive/tlnet/update-tlmgr-latest.sh" && sh update-tlmgr-latest.sh -- --upgrade && rm -f update-tlmgr-latest.sh && \
-    export TEXLIVE_PATH=/usr/local/texlive && \
-    ls -la "${TEXLIVE_PATH}" && \
-    export TEXLIVE_VERSION="$(find "${TEXLIVE_PATH}" -type d -name "2*" -printf "%f\n" | tail -1)" && \
+RUN curl -fsSL -O "https://mirror.ctan.org/systems/texlive/tlnet/update-tlmgr-latest.sh" && \
+    if [ "$TLMGR_UPGRADE_MODE" = "no-upgrade" ]; then \
+        echo "Skipping tlmgr upgrade as per TLMGR_UPGRADE_MODE"; \
+    else \
+        echo "Upgrading tlmgr as per TLMGR_UPGRADE_MODE"; \
+        sh update-tlmgr-latest.sh --upgrade; \
+    fi && \
+    rm -f update-tlmgr-latest.sh
+    
+RUN export TEXLIVE_PATH=/usr/local/texlive && \
+    ls -la "${TEXLIVE_PATH}"
+    
+RUN export TEXLIVE_VERSION="$(find "${TEXLIVE_PATH}" -type d -name "2*" -printf "%f\n" | tail -1)" && \
     export PATH="${PATH}:${TEXLIVE_PATH}/${TEXLIVE_VERSION}/bin/x86_64-linux" && \
-    echo "${PATH}" && \
-    tlmgr path add && \
+    echo "${PATH}"
+    
+RUN tlmgr path add && \
     tlmgr update --self --all && \
     luaotfload-tool -fu && \
     tlmgr path add && \

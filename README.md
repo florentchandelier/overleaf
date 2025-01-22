@@ -36,23 +36,72 @@ We have detailed installation instructions in the [Overleaf Toolkit](https://git
 
 If you are upgrading from a previous version of Overleaf, please see the [Release Notes section on the Wiki](https://github.com/overleaf/overleaf/wiki#release-notes) for all of the versions between your current version and the version you are upgrading to.
 
-## Overleaf Docker Image
+## Overleaf Docker Images
 
-This repo contains two dockerfiles, [`Dockerfile-base`](server-ce/Dockerfile-base), which builds the
-`sharelatex/sharelatex-base` image, and [`Dockerfile`](server-ce/Dockerfile) which builds the
-`sharelatex/sharelatex` (or "community") image.
+This repository contains Dockerfiles for building Docker images of Overleaf, both with a lean setup (minimal TeX Live) and a full setup (complete TeX Live distribution). These images are used to deploy Overleaf with varying levels of TeX Live support depending on your needs.
 
+### Dockerfiles
+1. **[`Dockerfile-base`](server-ce/Dockerfile-base):**
+   - Builds the base image: `sharelatex/sharelatex-ce-base`.
+   - This image provides the foundational environment needed for Overleaf with minimal TeX Live tools.
 
-Use `make build-base` and `make build-community` from `server-ce/` to build these images. The `sharelatex/sharelatex-ce` 
-image extends the base image and adds the actual Overleaf code and services. 
-The `sharelatex/sharelatex-ce` is the image **used by the overleaf-toolkit**.
+2. **[`Dockerfile`](server-ce/Dockerfile):**
+   - Builds the community image: `sharelatex/sharelatex-ce`.
+   - This image extends the base image and includes Overleaf's core services and code.
+   - This is the primary image **used by the overleaf-toolkit** for deploying Overleaf with a minimal TeX Live setup.
 
-    OR
+3. **[`Dockerfile-base-full`](server-ce/Dockerfile-base-full):**
+   - Builds the full base image: `sharelatex/sharelatex-ce-base-fulltexlive`.
+   - This image provides the foundational environment with the full TeX Live distribution preinstalled.
 
-Use `make build-base-fulltexlive` and `make build-community-fulltexlive` to build Overleaf with the full TexLive distro. 
-The `sharelatex/sharelatex-ce-full` 
-image extends the base image and adds the actual Overleaf code and services. 
-The `sharelatex/sharelatex-ce-full` is the image **used by the overleaf-toolkit**.
+4. **[`Dockerfile`](server-ce/Dockerfile) (with full TeX Live):**
+   - Builds the full community image: `sharelatex/sharelatex-ce-fulltexlive`.
+   - This image extends the full base image and includes Overleaf's core services and code, with full TeX Live support.
+   - This is the image **used by the overleaf-toolkit** for deploying Overleaf with complete TeX Live capabilities.
+
+### Building Images
+
+To build the Docker images, navigate to the `server-ce/` directory and use the provided `Makefile` commands:
+
+#### Lean Setup (Minimal TeX Live):
+1. **Build the base image:**
+    ```bash
+    make build-base
+    ```
+    Produces: sharelatex/sharelatex-ce-base
+
+2. **Build the community image:**
+    ```bash
+    make build-community
+    ```
+
+    Produces: sharelatex/sharelatex-ce
+
+#### Full Setup (Complete TeX Live):
+
+1. **Build the full base image:**
+    ```bash
+    make build-base-fulltexlive
+    ```
+
+    Produces: sharelatex/sharelatex-ce-base-fulltexlive
+
+2. **Build the full community image:**
+    ```bash
+    make build-community-fulltexlive
+    ```
+
+    Produces: sharelatex/sharelatex-ce-fulltexlive
+
+### Summary of Images
+
+| Image Name                                | Description                                | TeX Live Setup  |
+|-------------------------------------------|--------------------------------------------|------------------|
+| `sharelatex/sharelatex-ce-base`           | Base image for Overleaf                   | Minimal          |
+| `sharelatex/sharelatex-ce`                | Community image with Overleaf services    | Minimal          |
+| `sharelatex/sharelatex-ce-base-fulltexlive`| Full base image with complete TeX Live    | Full             |
+| `sharelatex/sharelatex-ce-fulltexlive`    | Full community image with Overleaf services and complete TeX Live | Full |
+
 
 ## Original Authors
 
@@ -62,4 +111,4 @@ The `sharelatex/sharelatex-ce-full` is the image **used by the overleaf-toolkit*
 
 The code in this repository is released under the GNU AFFERO GENERAL PUBLIC LICENSE, version 3. A copy can be found in the [`LICENSE`](LICENSE) file.
 
-Copyright (c) Overleaf, 2014-2024.
+Copyright (c) Overleaf
