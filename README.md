@@ -1,7 +1,18 @@
-<h1 align="center">
+## Community Edition - with community-enabled modules
+
+[Overleaf](https://www.overleaf.com) is an open-source online real-time collaborative LaTeX editor. This repo is meant for self-hosting overleaf (or a local version of it).
+
+A professional version, with free-tier, is available from the original developers at [www.overleaf.com](https://www.overleaf.com), and enterprise support is available at [Overleaf Server Pro](https://www.overleaf.com/for/enterprises).
+
+### Community-enabled Modules and other enhancements
+* comments: created by [yu-i-i/overleaf-cep](https://github.com/yu-i-i/overleaf-cep), tracked by community issue [1193](https://github.com/overleaf/overleaf/issues/1193)
+* track change: created by [yu-i-i/overleaf-cep](https://github.com/yu-i-i/overleaf-cep), tracked by community issue [1193](https://github.com/overleaf/overleaf/issues/1193)
+* build full TexLive base distros (see below) with `make full` from `server-ce/` 
+
+<h2 align="center">
   <br>
   <a href="https://www.overleaf.com"><img src="doc/logo.png" alt="Overleaf" width="300"></a>
-</h1>
+</h2>
 
 <h4 align="center">An open-source online real-time collaborative LaTeX editor.</h4>
 
@@ -16,17 +27,6 @@
 <p align="center">
   Figure 1: A screenshot of a project being edited in Overleaf Community Edition.
 </p>
-
-## Community Edition - with community-enabled modules
-
-[Overleaf](https://www.overleaf.com) is an open-source online real-time collaborative LaTeX editor. This repo is meant for self-hosting overleaf (or a local version of it).
-
-A professional version, with free-tier, is available from the original developers at [www.overleaf.com](https://www.overleaf.com), and enterprise support is available at [Overleaf Server Pro](https://www.overleaf.com/for/enterprises).
-
-### Community-enabled Modules and other enhancements
-* comments: created by [yu-i-i/overleaf-cep](https://github.com/yu-i-i/overleaf-cep), tracked by community issue [1193](https://github.com/overleaf/overleaf/issues/1193)
-* track change: created by [yu-i-i/overleaf-cep](https://github.com/yu-i-i/overleaf-cep), tracked by community issue [1193](https://github.com/overleaf/overleaf/issues/1193)
-* build full TexLive base distros (fix version issues and more) with `make full` from from `server-ce/` 
 
 ## Installation
 
