@@ -31,6 +31,7 @@ A professional version, with free-tier, is available from the original developer
 ## Installation
 
 This repo is meant to operate with [Overlead Toolkit for Overleaf-ce](https://github.com/florentchandelier/overleaf-toolkit)
+
 The original installation instructions can be accessed at [Overleaf Toolkit](https://github.com/overleaf/toolkit/).
 
 ## Upgrading
