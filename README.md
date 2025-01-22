@@ -34,6 +34,18 @@ This repo is meant to operate with [Overleaf Toolkit for Overleaf-ce](https://gi
 
 The original installation instructions can be accessed at [Overleaf Toolkit](https://github.com/overleaf/toolkit/).
 
+### Tracking Original Repo (dev notes)
+
+```
+git remote add overleaf-original git@github.com:overleaf/overleaf.git
+git fetch overleaf-original
+git checkout main
+git branch --set-upstream-to=overleaf-original/main main
+git pull
+```
+
+... then align modifications with this repo's branch overleaf-ce.
+
 ## Upgrading
 
 If you are upgrading from a previous version of Overleaf, please see the [Release Notes section on the Wiki](https://github.com/overleaf/overleaf/wiki#release-notes) for all of the versions between your current version and the version you are upgrading to.
